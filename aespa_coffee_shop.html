@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AESPA COFFEE SHOP</title>
+
+    <!-- FONT AWESOME ICONS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: Georgia, serif;
+            background-color: #f4e7d1;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #6f4e37, #a67556);
+            padding: 25px;
+            color: white;
+            text-align: center;
+            font-size: 28px;
+        }
+
+        /* NAVBAR */
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            background-color: #c8a97e;
+            padding: 14px;
+            position: relative;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #4b2e16;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        nav a:hover { color: white; }
+
+        /* ICONS RIGHT SIDE */
+        .nav-icons {
+            position: absolute;
+            right: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-icons i {
+            font-size: 22px;
+            color: #4b2e16;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-icons i:hover {
+            color: white;
+            transform: scale(1.12);
+        }
+
+        /* CART BADGE */
+        .cart { position: relative; }
+
+        .badge {
+            position: absolute;
+            top: -6px;
+            right: -10px;
+            background: red;
+            color: white;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        /* PROFILE DROPDOWN */
+        .profile-menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            width: 180px;
+            background: #fff5e1;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.25);
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .profile-menu a {
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #4b2e16;
+            font-size: 16px;
+        }
+
+        .profile-menu a:hover {
+            background: #e8d2b3;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px;
+
+           background-image: url('');
+           background-size: cover;       /* fill section proportionally */
+            background-position: center;  /* center image */
+            background-repeat: no-repeat;
+        }
+
+        /* Optional overlay for text visibility */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(244, 231, 209, 0.3); /* light overlay */
+            z-index: 0;
+        }
+
+        .hero h2, .hero p, .hero button {
+            position: relative;
+            z-index: 1; /* text above overlay */
+            color: #4b2e16;
+            margin: 10px 0;
+        }
+
+        .hero button {
+            margin-top: 20px;
+            padding: 12px 22px;
+            background-color: #6f4e37;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        .hero button:hover {
+            background-color: #4b2e16;
+            box-shadow: 0 0 12px rgba(111, 78, 55, 0.6);
+        }
+
+        /* SECTIONS */
+        .section {
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 2px dashed #d6b691;
+        }
+
+        /* CARDS */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .card {
+            background-color: #fff5e1;
+            width: 250px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        /* BUTTONS */
+        .order-btn, .add-btn {
+            margin-top: 10px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 10px;
+            background: #c8a97e;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s ease-in-out;
+        }
+
+        .order-btn:hover, .add-btn:hover {
+            background-color: #6f4e37;
+            color: white;
+            box-shadow: 0 0 12px rgba(111, 78, 55, 0.6);
+        }
+
+        /* CONTACT BOX */
+        .contact-box {
+            background: #f7e9cf;
+            padding: 40px;
+            width: 80%;
+            margin: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        input, textarea {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #b58d63;
+            font-family: Georgia;
+        }
+
+        .send-btn {
+            padding: 12px 20px;
+            background-color: #6f4e37;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: 0.3s ease-in-out;
+        }
+
+        .send-btn:hover {
+            background-color: #4b2e16;
+            box-shadow: 0 0 12px rgba(111, 78, 55, 0.6);
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(180deg, #6f4e37, #4b2e16);
+            color: white;
+            padding: 18px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* GALLERY */
+        .gallery img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            margin: 10px;
+            border-radius: 12px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    AESPA COFFEE SHOP
+</header>
+
+<div class="promo-bar">
+    ☕ BUY 1 TAKE 1 every Friday — AESPA COFFEE FESTIVAL! 🎉
+</div>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#menu">Menu</a>
+    <a href="#addons">Add-ons</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact Us</a>
+
+    <div class="nav-icons">
+        <i class="fa-solid fa-user" id="profileBtn"></i>
+        <div class="profile-menu" id="profileMenu">
+            <a href="#"><i class="fa-solid fa-user"></i> My Profile</a>
+            <a href="#"><i class="fa-solid fa-bag-shopping"></i> My Orders</a>
+            <a href="#"><i class="fa-solid fa-heart"></i> Favorites</a>
+            <a href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </div>
+        <div class="cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="badge">3</span>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="home">
+    <h2>Welcome to AESPA Coffee Shop!</h2>
+    <p>A K-Pop inspired café serving your favorite idol-themed drinks ☕✨</p>
+    <button onclick="alert('Redirecting to the order page!')">Order Now</button>
+</div>
+
+<!-- MENU -->
+<section class="section" id="menu">
+    <h2>☕ Our Best Sellers</h2>
+    <div class="card-container">
+        <div class="card">
+            <img src="espresso.jpg" alt="Espresso">
+            <h3>Espresso</h3>
+            <p>Strong and bold energy ☕</p>
+            <button class="order-btn">Order Now</button>
+        </div>
+        <div class="card">
+            <img src="caramel machiato.jpg" alt="Caramel Machiatto">
+            <h3>Caramel Machiatto</h3>
+            <p>Sweet caramel delight ✨</p>
+            <button class="order-btn">Order Now</button>
+        </div>
+        <div class="card">
+            <img src="mocha grove latte.jpg" alt="Mocha Grove Latte">
+            <h3>Mocha Grove Latte</h3>
+            <p>Chocolate and coffee bliss 🍫</p>
+            <button class="order-btn">Order Now</button>
+        </div>
+        <div class="card">
+            <img src="choco iced.jpg" alt="Choco Iced Rhythm">
+            <h3>Choco Iced Rhythm</h3>
+            <p>Cool chocolate iced treat ❄️</p>
+            <button class="order-btn">Order Now</button>
+        </div>
+    </div>
+</section>
+
+<!-- ADD-ONS -->
+<section class="section" id="addons">
+    <h2>➕ Add-ons & Extras</h2>
+    <div class="addons-list">
+        <ul>
+            <li>Milk Options
+                <ol>
+                    <li>Whole Milk <button class="add-btn">Add</button></li>
+                    <li>Almond Milk <button class="add-btn">Add</button></li>
+                    <li>Oat Milk <button class="add-btn">Add</button></li>
+                </ol>
+            </li>
+            <li>Syrups
+                <ol>
+                    <li>Vanilla <button class="add-btn">Add</button></li>
+                    <li>Caramel <button class="add-btn">Add</button></li>
+                    <li>Hazelnut <button class="add-btn">Add</button></li>
+                </ol>
+            </li>
+            <li>Toppings
+                <ol>
+                    <li>Whipped Cream <button class="add-btn">Add</button></li>
+                    <li>Chocolate Drizzle <button class="add-btn">Add</button></li>
+                    <li>Cinnamon <button class="add-btn">Add</button></li>
+                </ol>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+    <h2>🏠 About Our Coffee Shop</h2>
+    <p>
+        AESPA Coffee Shop blends K-Pop energy with cozy café vibes.
+        We serve handcrafted drinks inspired by the members of Aespa.
+    </p>
+</section>
+
+<!-- REVIEWS -->
+<section class="section">
+    <h2>⭐ Customer Reviews</h2>
+    <div class="review-box">“The Espresso is AMAZING!” – ★★★★★</div>
+    <div class="review-box">“Best K-pop café ever!” – ★★★★★</div>
+    <div class="review-box">“So aesthetic and yummy drinks!” – ★★★★☆</div>
+</section>
+
+<!-- GALLERY -->
+<section class="section" id="gallery">
+    <h2>📸 Coffee Gallery</h2>
+    <div class="gallery">
+       
+        <img src="gallery2.jpg" alt="Coffee 2">
+        <img src="gallery3.jpg" alt="Coffee 3">
+        <img src="gallery4.jpg" alt="Coffee 4">
+        <img src="galllery6.jpg" alt="Coffee 6">
+        <img src="gallery7.jpg" alt="Coffee 7">
+    
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+    <h2>📞 Contact Us</h2>
+    <div class="contact-box">
+        <h3>Send us a message</h3>
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Your Email">
+        <textarea rows="5" placeholder="Your Message"></textarea>
+        <button class="send-btn">Send Message</button>
+    </div>
+    <p><i class="fa-solid fa-envelope"></i> aespacoffee@gmail.com</p>
+    <p><i class="fa-brands fa-facebook"></i> @AespaCoffeePH</p>
+    <p><i class="fa-solid fa-location-dot"></i> Taguig City</p>
+</section>
+
+<footer>
+    © 2025 AESPA COFFEE SHOP — All Rights Reserved.
+</footer>
+
+<!-- FLOATING CART -->
+<div class="floating-cart">
+    <i class="fa-solid fa-cart-shopping"></i>
+</div>
+
+<!-- BACK TO TOP BUTTON -->
+<button id="topBtn" onclick="window.scrollTo({top:0, behavior:'smooth'});">
+    ↑ Top
+</button>
+
+<script>
+    /* PROFILE DROPDOWN */
+    const profileBtn = document.getElementById("profileBtn");
+    const profileMenu = document.getElementById("profileMenu");
+
+    profileBtn.addEventListener("click", () => {
+        profileMenu.style.display =
+            profileMenu.style.display === "block" ? "none" : "block";
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!profileMenu.contains(e.target) && e.target !== profileBtn) {
+            profileMenu.style.display = "none";
+        }
+    });
+
+    /* BACK TO TOP BUTTON */
+    window.onscroll = function() {
+        let btn = document.getElementById("topBtn");
+        if (document.documentElement.scrollTop > 200) {
+            btn.style.display = "block";
+        } else {
+            btn.style.display = "none";
+        }
+    };
+
+    /* CART COUNTER + ANIMATION */
+    let cartCount = 3;
+    const badge = document.querySelector('.badge');
+
+    document.querySelectorAll('.order-btn, .add-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            cartCount++;
+            badge.textContent = cartCount;
+
+            const plusOne = document.createElement('span');
+            plusOne.className = 'plus-one';
+            plusOne.textContent = '+1';
+
+            const rect = e.target.getBoundingClientRect();
+            plusOne.style.left = rect.left + rect.width/2 + 'px';
+            plusOne.style.top = rect.top + 'px';
+
+            document.body.appendChild(plusOne);
+            setTimeout(() => plusOne.remove(), 1000);
+        });
+    });
+</script>
+
+</body>
+</html>
