@@ -1,2 +1,0 @@
-# aespacoffeeshop.html
-coffeeshop activity
